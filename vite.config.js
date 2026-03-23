@@ -10,4 +10,5 @@ export default defineConfig({
     outDir: "../dist/frontend",
     emptyOutDir: true,
   },
+    base: "/ecommerce-platzi-store-v2/",
 });
