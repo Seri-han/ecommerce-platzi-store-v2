@@ -263,30 +263,6 @@
       }
     }
 
-    .mobile-menu-close {
-      position: fixed;
-      top: calc($spacing-lg + 0.125rem);
-      right: calc(2rem + #{$spacing-md});
-      width: 44px;
-      height: 44px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      border: 1px solid rgba($white, 0.12);
-      border-radius: 999px;
-      background: rgba($white, 0.04);
-      color: $white;
-      font-size: 1.75rem;
-      line-height: 1;
-
-      &:hover,
-      &:focus-visible {
-        background: rgba($primary, 0.14);
-        color: $primary;
-        outline: none;
-      }
-    }
-
     .mobile-menu-main {
       display: flex;
       flex-direction: column;
