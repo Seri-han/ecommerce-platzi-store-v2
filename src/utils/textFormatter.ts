@@ -1,5 +1,5 @@
 
-export const cleanProductName = (title) => {
+export const cleanProductName = (title: string) => {
   if (!title) return 'Product';
   
   let cleaned = title
@@ -14,8 +14,8 @@ export const cleanProductName = (title) => {
 };
 
 
-export const formatPrice = (price) => {
-  let numPrice = parseFloat(price);
+export const formatPrice = (price: number) => {
+  let numPrice = parseFloat(String(price));
   
   if (isNaN(numPrice)) {
     return '$0.00';
@@ -36,7 +36,7 @@ export const formatPrice = (price) => {
   return `$${numPrice.toFixed(2)}`;
 };
 
-export const truncateText = (text, length = 60) => {
+export const truncateText = (text: string, length = 60) => {
   if (!text) return '';
   return text.length > length ? text.substring(0, length) + '...' : text;
 };

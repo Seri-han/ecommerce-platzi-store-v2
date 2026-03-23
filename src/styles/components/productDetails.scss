@@ -1,5 +1,6 @@
 @import '../variables.scss';
 
+
 .product-details {
   max-width: 1000px;
   margin: 0 auto;
@@ -51,6 +52,13 @@
     max-height: 100%;
     object-fit: cover;
     animation: slideUp 0.8s ease-out;
+    transform: scale(1);
+    transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: transform;
+  }
+
+  &:hover img {
+    transform: scale(1.04);
   }
 }
 
@@ -114,8 +122,20 @@
     align-self: flex-start;
     animation: slideUp 0.8s ease-out 0.3s both;
 
+    &.is-added {
+      background-color: $primary-dark;
+      border-color: $primary-dark;
+    }
+
     &:hover {
       box-shadow: 0 0 30px rgba(16, 185, 129, 0.5);
     }
+  }
+
+  .cart-feedback {
+    margin-top: $spacing-sm;
+    color: $primary;
+    font-size: $font-size-sm;
+    font-weight: 600;
   }
 }

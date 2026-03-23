@@ -1,5 +1,6 @@
 @import '../variables.scss';
 
+
 .product-card {
   background-color: $black-light;
   border-radius: $radius-lg;
@@ -31,6 +32,8 @@
   overflow: hidden;
   position: relative;
   background: linear-gradient(135deg, $black-lighter 0%, $black 100%);
+  transition: 0.3s ease-in-out;
+  border-radius: 1rem;
 
   img {
     width: 100%;
@@ -158,8 +161,8 @@
       width: 40px;
       height: 40px;
       border-radius: 50%;
-      background-color: $white;
-      color: $black;
+      background-color: $black;
+      color: $white;
       font-size: $font-size-lg;
       font-weight: 700;
       transition: all $transition-base;
@@ -171,7 +174,8 @@
       &:hover:not(:disabled) {
         background-color: $primary-light;
         box-shadow: 0 0 15px rgba($primary-dark, 0.4);
-        transform: scale(1.1);
+        // transform: scale(1.05);
+        color: $black;
       }
 
       &.adding {

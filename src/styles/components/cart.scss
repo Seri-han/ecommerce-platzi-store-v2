@@ -1,6 +1,5 @@
 @import '../variables.scss';
 
-
 @media (min-width: 769px) {
   .cart-summary {
       width: 100%;
@@ -15,6 +14,10 @@
     margin-bottom: $spacing-2xl;
     color: $white;
   }
+}
+
+a.cart-link.btn.btn-secondary {
+  color: $black;
 }
 
 .empty-cart {
