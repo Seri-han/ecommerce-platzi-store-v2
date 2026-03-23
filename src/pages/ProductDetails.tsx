@@ -1,5 +1,5 @@
 import { useParams, useNavigate } from "react-router-dom";
-import { useState, useEffect, useMemo, useRef } from "react";
+import { useState, useEffect, useMemo } from "react";
 //api
 import { trpc } from "../api/trpc";
 //store
@@ -10,6 +10,7 @@ import LoadingSpinner from "../components/LoadingSpinner";
 //error imports
 import ErrorMessage from "../components/ErrorMessage";
 import { normalizeError, getSafeImageUrl } from "../utils/errorHandler";
+import { usePageTopRef } from "../hooks/usePageTopRef";
 //styles
 import "../styles/components/productDetails.scss";
 
@@ -46,7 +47,7 @@ export default function ProductDetails() {
   const { id } = useParams();
   const navigate = useNavigate();
   const addToCart = useCartStore((state) => state.addToCart);
-  const pageTopRef = useRef<HTMLDivElement | null>(null);
+  const { pageTopRef } = usePageTopRef();
   const [imageError, setImageError] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
   const [isAddedToCart, setIsAddedToCart] = useState(false);
@@ -93,10 +94,6 @@ export default function ProductDetails() {
 
     return () => window.clearTimeout(timeoutId);
   }, [isAddedToCart]);
-
-  useEffect(() => {
-    pageTopRef.current?.scrollIntoView({ behavior: "auto", block: "start" });
-  }, []);
 
   const handleAddToCart = () => {
     if (!product) return;

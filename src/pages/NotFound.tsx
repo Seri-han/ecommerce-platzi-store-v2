@@ -1,14 +1,10 @@
-import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
+import { usePageTopRef } from '../hooks/usePageTopRef';
 import '../styles/components/notFound.scss';
 import notFoundGif from "../assets/giphy.gif";
 
 export default function NotFound() {
-  const pageTopRef = useRef<HTMLDivElement | null>(null);
-
-  useEffect(() => {
-    pageTopRef.current?.scrollIntoView({ behavior: 'auto', block: 'start' });
-  }, []);
+  const { pageTopRef } = usePageTopRef();
 
   return (
     <div className="not-found" ref={pageTopRef}>

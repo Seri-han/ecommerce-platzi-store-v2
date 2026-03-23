@@ -1,4 +1,3 @@
-import { useEffect, useRef } from "react";
 import ProductCard from "../components/ProductCard";
 import LoadingSpinner from "../components/LoadingSpinner";
 //error imports
@@ -6,11 +5,12 @@ import ErrorMessage from "../components/ErrorMessage";
 import { normalizeError } from "../utils/errorHandler";
 //api
 import { trpc } from "../api/trpc";
+import { usePageTopRef } from "../hooks/usePageTopRef";
 //styles
 import "../styles/components/home.scss";
 
 export default function Home() {
-  const pageTopRef = useRef<HTMLDivElement | null>(null);
+  const { pageTopRef } = usePageTopRef();
 
   const {
     data: products = [],
@@ -21,10 +21,6 @@ export default function Home() {
 
   const featured = products.slice(0, 10);
   const appError = error ? normalizeError(error) : null;
-
-  useEffect(() => {
-    pageTopRef.current?.scrollIntoView({ behavior: "auto", block: "start" });
-  }, []);
 
   return (
     <div className="home" ref={pageTopRef}>

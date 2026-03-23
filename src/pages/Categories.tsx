@@ -3,6 +3,7 @@ import { trpc } from "../api/trpc";
 import ProductCard from "../components/ProductCard";
 import LoadingSpinner from "../components/LoadingSpinner";
 import ErrorMessage from "../components/ErrorMessage";
+import { usePageTopRef } from "../hooks/usePageTopRef";
 import { normalizeError } from "../utils/errorHandler";
 import "../styles/components/categories.scss";
 
@@ -26,7 +27,7 @@ export default function Categories() {
   const [sortBy, setSortBy] = useState<SortBy>("name");
   const [currentPage, setCurrentPage] = useState(1);
   const [showAllCategories, setShowAllCategories] = useState(false);
-  const pageTopRef = useRef<HTMLDivElement | null>(null);
+  const { pageTopRef, scrollToTop } = usePageTopRef();
   const hasScrolledOnInteraction = useRef(false);
 
   const itemsPerPage = 12;
@@ -91,8 +92,8 @@ export default function Categories() {
       return;
     }
 
-    pageTopRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
-  }, [currentPage, selectedCategory, searchTerm, sortBy]);
+    scrollToTop("smooth");
+  }, [currentPage, scrollToTop, searchTerm, selectedCategory, sortBy]);
 
   const totalPages = Math.ceil(products.length / itemsPerPage);
 

@@ -1,17 +1,13 @@
-import { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import useCartStore from "../store/cartStore";
 import { formatPrice } from "../utils/textFormatter";
 import CartItem from "../components/CartItem";
+import { usePageTopRef } from "../hooks/usePageTopRef";
 import "../styles/components/cart.scss";
 
 export default function Cart() {
-  const pageTopRef = useRef<HTMLDivElement | null>(null);
+  const { pageTopRef } = usePageTopRef();
   const { cart, clearCart } = useCartStore();
-
-  useEffect(() => {
-    pageTopRef.current?.scrollIntoView({ behavior: "auto", block: "start" });
-  }, []);
 
   let total = 0;
 
