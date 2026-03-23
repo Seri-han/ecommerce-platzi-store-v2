@@ -250,12 +250,12 @@
       flex-direction: column;
       min-height: 100vh;
       padding: calc(7.25rem + #{$spacing-md}) 2rem $spacing-xl;
-      background: rgba($black-light, 0.98);
+      background: rgba($black-light, 1);
       box-shadow: $shadow-xl;
       opacity: 0;
       pointer-events: none;
-      transform: translateY(-1rem);
-      transition: opacity $transition-base, transform $transition-base;
+      transform: translateY(-100%);
+      transition: transform $transition-slow, opacity $transition-base;
       overflow-y: auto;
       z-index: 1;
 
@@ -278,7 +278,9 @@
       align-items: center;
       justify-content: space-between;
       width: 100%;
-      padding: $spacing-md;
+      padding-left: $spacing-md;
+      padding-right: $spacing-md;
+      margin-bottom: $spacing-lg;
       color: $white;
       font-family: $font-display;
       font-weight: 500;
