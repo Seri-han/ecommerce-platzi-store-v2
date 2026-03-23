@@ -247,7 +247,7 @@
       display: flex;
       flex-direction: column;
       min-height: 100vh;
-      padding: calc(7.25rem + #{$spacing-md}) $spacing-md $spacing-xl;
+      padding: calc(7.25rem + #{$spacing-md}) 2rem $spacing-xl;
       background: rgba($black-light, 0.98);
       box-shadow: $shadow-xl;
       opacity: 0;
@@ -263,23 +263,10 @@
       }
     }
 
-    .mobile-menu-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: $spacing-md;
-      margin-bottom: $spacing-lg;
-      padding-inline: $spacing-sm;
-    }
-
-    .mobile-menu-label {
-      color: rgba($white, 0.72);
-      font-size: $font-size-sm;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-    }
-
     .mobile-menu-close {
+      position: fixed;
+      top: calc($spacing-lg + 0.125rem);
+      right: calc(2rem + #{$spacing-md});
       width: 44px;
       height: 44px;
       display: inline-flex;
@@ -304,7 +291,7 @@
       display: flex;
       flex-direction: column;
       gap: $spacing-xs;
-      padding-inline: $spacing-sm;
+      padding-inline: 2rem;
     }
 
     .mobile-nav-link {
@@ -352,7 +339,7 @@
     .mobile-menu-footer {
       margin-top: auto;
       padding-top: $spacing-xl;
-      padding-inline: $spacing-sm;
+      padding-inline: 2rem;
       display: flex;
       flex-direction: column;
       gap: $spacing-lg;

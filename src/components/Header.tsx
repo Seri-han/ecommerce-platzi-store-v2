@@ -89,17 +89,14 @@ export default function Header() {
           className={`mobile-menu ${isMobileMenuOpen ? 'is-open' : ''}`}
           aria-label="Mobile navigation"
         >
-          <div className="mobile-menu-header">
-            <p className="mobile-menu-label">Menu</p>
-            <button
-              type="button"
-              className="mobile-menu-close"
-              onClick={() => setIsMobileMenuOpen(false)}
-              aria-label="Close navigation menu"
-            >
-              <span aria-hidden="true">×</span>
-            </button>
-          </div>
+          <button
+            type="button"
+            className="mobile-menu-close"
+            onClick={() => setIsMobileMenuOpen(false)}
+            aria-label="Close navigation menu"
+          >
+            <span aria-hidden="true">×</span>
+          </button>
 
           <div className="mobile-menu-main">
             <NavLink to="/categories" className="mobile-nav-link" onClick={() => setIsMobileMenuOpen(false)}>
