@@ -1,5 +1,5 @@
 import { useParams, useNavigate } from "react-router-dom";
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useRef } from "react";
 //api
 import { trpc } from "../api/trpc";
 //store
@@ -46,6 +46,7 @@ export default function ProductDetails() {
   const { id } = useParams();
   const navigate = useNavigate();
   const addToCart = useCartStore((state) => state.addToCart);
+  const pageTopRef = useRef<HTMLDivElement | null>(null);
   const [imageError, setImageError] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
   const [isAddedToCart, setIsAddedToCart] = useState(false);
@@ -93,6 +94,10 @@ export default function ProductDetails() {
     return () => window.clearTimeout(timeoutId);
   }, [isAddedToCart]);
 
+  useEffect(() => {
+    pageTopRef.current?.scrollIntoView({ behavior: "auto", block: "start" });
+  }, []);
+
   const handleAddToCart = () => {
     if (!product) return;
 
@@ -139,7 +144,7 @@ export default function ProductDetails() {
   const price = formatPrice(product.price ?? 0);
 
   return (
-    <div className="product-details">
+    <div className="product-details" ref={pageTopRef}>
       <button className="btn-back" onClick={() => navigate(-1)}>
         ← Back
       </button>

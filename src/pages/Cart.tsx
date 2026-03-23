@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import useCartStore from "../store/cartStore";
 import { formatPrice } from "../utils/textFormatter";
@@ -5,7 +6,12 @@ import CartItem from "../components/CartItem";
 import "../styles/components/cart.scss";
 
 export default function Cart() {
+  const pageTopRef = useRef<HTMLDivElement | null>(null);
   const { cart, clearCart } = useCartStore();
+
+  useEffect(() => {
+    pageTopRef.current?.scrollIntoView({ behavior: "auto", block: "start" });
+  }, []);
 
   let total = 0;
 
@@ -18,7 +24,7 @@ export default function Cart() {
   const totalFormatted = formatPrice(total);
 
   return (
-    <div className="cart-page">
+    <div className="cart-page" ref={pageTopRef}>
       <h1>Shopping Cart</h1>
 
       {cart.length === 0 ? (

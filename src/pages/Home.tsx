@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import ProductCard from "../components/ProductCard";
 import LoadingSpinner from "../components/LoadingSpinner";
 //error imports
@@ -9,6 +10,8 @@ import { trpc } from "../api/trpc";
 import "../styles/components/home.scss";
 
 export default function Home() {
+  const pageTopRef = useRef<HTMLDivElement | null>(null);
+
   const {
     data: products = [],
     isLoading: loading,
@@ -19,8 +22,12 @@ export default function Home() {
   const featured = products.slice(0, 10);
   const appError = error ? normalizeError(error) : null;
 
+  useEffect(() => {
+    pageTopRef.current?.scrollIntoView({ behavior: "auto", block: "start" });
+  }, []);
+
   return (
-    <div className="home">
+    <div className="home" ref={pageTopRef}>
       <section className="hero">
         <div className="hero-content">
           <h1>Welcome to Platzi Store</h1>
