@@ -23,10 +23,26 @@ export default function Header() {
     };
   }, [isMobileMenuOpen]);
 
+  useEffect(() => {
+    if (!isMobileMenuOpen) return;
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setIsMobileMenuOpen(false);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isMobileMenuOpen]);
+
   return (
     <header className="header">
       <div className="container">
-        <Link to="/" className="logo">
+        <Link to="/" className="logo" onClick={() => setIsMobileMenuOpen(false)}>
           Platzi Store
         </Link>
 
@@ -73,11 +89,28 @@ export default function Header() {
           className={`mobile-menu ${isMobileMenuOpen ? 'is-open' : ''}`}
           aria-label="Mobile navigation"
         >
+          <div className="mobile-menu-header">
+            <p className="mobile-menu-label">Menu</p>
+            <button
+              type="button"
+              className="mobile-menu-close"
+              onClick={() => setIsMobileMenuOpen(false)}
+              aria-label="Close navigation menu"
+            >
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+
           <div className="mobile-menu-main">
-            <NavLink to="/categories" className="mobile-nav-link">
+            <NavLink to="/categories" className="mobile-nav-link" onClick={() => setIsMobileMenuOpen(false)}>
               Categories
             </NavLink>
-            <NavLink to="/cart" className="mobile-nav-link" aria-label={cartLabel}>
+            <NavLink
+              to="/cart"
+              className="mobile-nav-link"
+              aria-label={cartLabel}
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
               Cart
               {itemCount > 0 && <span className="mobile-nav-badge">{itemCount}</span>}
             </NavLink>
@@ -93,9 +126,9 @@ export default function Header() {
               <div className="mobile-footer-section">
                 <h4>Quick Links</h4>
                 <div className="mobile-footer-links">
-                  <Link to="/">Home</Link>
-                  <Link to="/categories">Categories</Link>
-                  <Link to="/cart">Cart</Link>
+                  <Link to="/" onClick={() => setIsMobileMenuOpen(false)}>Home</Link>
+                  <Link to="/categories" onClick={() => setIsMobileMenuOpen(false)}>Categories</Link>
+                  <Link to="/cart" onClick={() => setIsMobileMenuOpen(false)}>Cart</Link>
                 </div>
               </div>
 

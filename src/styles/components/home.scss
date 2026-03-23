@@ -94,3 +94,9 @@
     transform: translateX(0);
   }
 }
+
+@media (max-width: $breakpoint-md) {
+  .hero {
+    padding-top: 5rem;
+  }
+}
