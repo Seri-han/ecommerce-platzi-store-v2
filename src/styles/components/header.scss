@@ -129,7 +129,7 @@
 
       &.active,
       &[aria-current='page'] {
-        color: $primary;
+        color: $white;
 
         &::after {
           width: 100%;
@@ -139,7 +139,7 @@
 
       &.active:hover,
       &[aria-current='page']:hover {
-        color: $primary-light;
+        color: $white;
 
         &::after {
           background-color: $primary-light;
