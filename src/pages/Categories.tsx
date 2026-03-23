@@ -112,9 +112,6 @@ export default function Categories() {
       <section className="categories-hero" aria-labelledby="categories-page-title">
         <p className="categories-eyebrow">Browse the catalog</p>
         <h1 id="categories-page-title">Categories</h1>
-        <p className="categories-description">
-          Explore products by category, refine the results, and jump back to the top when you change filters or pages.
-        </p>
       </section>
 
       <div className="categories">

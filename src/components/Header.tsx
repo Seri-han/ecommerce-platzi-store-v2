@@ -1,11 +1,18 @@
-import { Link, NavLink } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Link, NavLink, useLocation } from 'react-router-dom';
 import useCartStore from '../store/cartStore';
 import '../styles/components/header.scss';
 
 export default function Header() {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const location = useLocation();
   const cartItems = useCartStore((state: any) => state.cart);
   const itemCount = cartItems.reduce((sum: number, item: any) => sum + item.quantity, 0);
   const cartLabel = itemCount > 0 ? `Cart, ${itemCount} item${itemCount === 1 ? '' : 's'}` : 'Cart';
+
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+  }, [location.pathname]);
 
   return (
     <header className="header">
@@ -15,6 +22,19 @@ export default function Header() {
         </Link>
 
         <div className="header-actions">
+          <button
+            type="button"
+            className={`menu-toggle ${isMobileMenuOpen ? 'is-open' : ''}`}
+            aria-expanded={isMobileMenuOpen}
+            aria-controls="mobile-navigation"
+            aria-label={isMobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+            onClick={() => setIsMobileMenuOpen((current) => !current)}
+          >
+            <span />
+            <span />
+            <span />
+          </button>
+
           <nav className="nav">
             {/* <Link to="/">Home</Link> */}
             <NavLink to="/categories">Categories</NavLink>
@@ -38,6 +58,20 @@ export default function Header() {
             {itemCount > 0 && <span className="cart-badge">{itemCount}</span>}
           </Link>
         </div>
+
+        <nav
+          id="mobile-navigation"
+          className={`mobile-menu ${isMobileMenuOpen ? 'is-open' : ''}`}
+          aria-label="Mobile navigation"
+        >
+          <NavLink to="/categories" className="mobile-nav-link">
+            Categories
+          </NavLink>
+          <NavLink to="/cart" className="mobile-nav-link" aria-label={cartLabel}>
+            Cart
+            {itemCount > 0 && <span className="mobile-nav-badge">{itemCount}</span>}
+          </NavLink>
+        </nav>
       </div>
     </header>
   );
