@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import useCartStore from '../store/cartStore';
 import '../styles/components/header.scss';
 
@@ -17,7 +17,7 @@ export default function Header() {
         <div className="header-actions">
           <nav className="nav">
             {/* <Link to="/">Home</Link> */}
-            <Link to="/categories">Categories</Link>
+            <NavLink to="/categories">Categories</NavLink>
           </nav>
 
           <Link to="/cart" className="cart-link btn btn-secondary" aria-label={cartLabel}>

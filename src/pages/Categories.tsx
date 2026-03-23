@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { trpc } from "../api/trpc";
 import ProductCard from "../components/ProductCard";
 import LoadingSpinner from "../components/LoadingSpinner";
@@ -26,6 +26,8 @@ export default function Categories() {
   const [sortBy, setSortBy] = useState<SortBy>("name");
   const [currentPage, setCurrentPage] = useState(1);
   const [showAllCategories, setShowAllCategories] = useState(false);
+  const pageTopRef = useRef<HTMLDivElement | null>(null);
+  const hasScrolledOnInteraction = useRef(false);
 
   const itemsPerPage = 12;
   const collapsedCategoryCount = 8;
@@ -83,6 +85,15 @@ export default function Categories() {
     setCurrentPage(1);
   }, [selectedCategory, searchTerm, sortBy]);
 
+  useEffect(() => {
+    if (!hasScrolledOnInteraction.current) {
+      hasScrolledOnInteraction.current = true;
+      return;
+    }
+
+    pageTopRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }, [currentPage, selectedCategory, searchTerm, sortBy]);
+
   const totalPages = Math.ceil(products.length / itemsPerPage);
 
   const paginatedProducts = products.slice(
@@ -97,7 +108,16 @@ export default function Categories() {
   const hiddenCategoryCount = Math.max(categories.length - collapsedCategoryCount, 0);
 
   return (
-    <div className="categories">
+    <div className="categories-page" ref={pageTopRef}>
+      <section className="categories-hero" aria-labelledby="categories-page-title">
+        <p className="categories-eyebrow">Browse the catalog</p>
+        <h1 id="categories-page-title">Categories</h1>
+        <p className="categories-description">
+          Explore products by category, refine the results, and jump back to the top when you change filters or pages.
+        </p>
+      </section>
+
+      <div className="categories">
       <aside className="filters" aria-label="Product filters">
         <div className="filter-group">
           <label htmlFor="search">Search</label>
@@ -125,10 +145,8 @@ export default function Categories() {
 
         <div className="filter-group categories-group">
           <div className="filter-group-header">
-            <h3 id="categories-heading">Categories</h3>
+            <h2 id="categories-heading">Categories</h2>
           </div>
-
-        
 
           <div
             id="categories-list"
@@ -175,7 +193,7 @@ export default function Categories() {
         </div>
       </aside>
 
-      <section className="products-section">
+      <section className="products-section" aria-labelledby="categories-page-title">
         {loading && <LoadingSpinner />}
 
         {appError && (
@@ -229,6 +247,7 @@ export default function Categories() {
           </>
         )}
       </section>
+      </div>
     </div>
   );
 }

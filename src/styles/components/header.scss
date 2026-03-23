@@ -5,8 +5,11 @@
   background-color: $black-light;
   border-bottom: 1px solid $gray-light;
   padding: $spacing-lg $spacing-md;
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
   z-index: $z-header;
   box-shadow: $shadow-md;
 
@@ -76,6 +79,25 @@
 
         &::after {
           width: 100%;
+        }
+      }
+
+      &.active,
+      &[aria-current='page'] {
+        color: $primary;
+
+        &::after {
+          width: 100%;
+          background-color: $primary;
+        }
+      }
+
+      &.active:hover,
+      &[aria-current='page']:hover {
+        color: $primary-light;
+
+        &::after {
+          background-color: $primary-light;
         }
       }
     }
