@@ -91,7 +91,7 @@ export default function Header() {
         >
           <div className="mobile-menu-main">
             <NavLink to="/categories" className="mobile-nav-link" onClick={() => setIsMobileMenuOpen(false)}>
-              Categories
+              <span className="mobile-nav-label">Categories</span>
             </NavLink>
             <NavLink
               to="/cart"
@@ -99,7 +99,7 @@ export default function Header() {
               aria-label={cartLabel}
               onClick={() => setIsMobileMenuOpen(false)}
             >
-              Cart
+              <span className="mobile-nav-label">Cart</span>
               {itemCount > 0 && <span className="mobile-nav-badge">{itemCount}</span>}
             </NavLink>
           </div>

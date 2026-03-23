@@ -50,6 +50,8 @@
     align-items: center;
     gap: $spacing-xl;
     margin-left: auto;
+    position: relative;
+    z-index: 2;
   }
 
   .menu-toggle {
@@ -255,6 +257,7 @@
       transform: translateY(-1rem);
       transition: opacity $transition-base, transform $transition-base;
       overflow-y: auto;
+      z-index: 1;
 
       &.is-open {
         opacity: 1;
@@ -276,25 +279,60 @@
       justify-content: space-between;
       width: 100%;
       padding: $spacing-md;
-      border-radius: $radius-md;
       color: $white;
       font-family: $font-display;
+      font-weight: 500;
       font-size: $font-size-base;
       text-decoration: none;
       background: transparent;
-      transition: background-color $transition-base, color $transition-base;
+      transition: color $transition-base;
+
+      .mobile-nav-label {
+        position: relative;
+        display: inline-flex;
+        width: fit-content;
+
+        &::after {
+          content: '';
+          position: absolute;
+          bottom: -4px;
+          left: 0;
+          width: 0;
+          height: 2px;
+          background-color: $primary-light;
+          transition: width $transition-base, background-color $transition-base;
+        }
+      }
 
       &:hover,
       &:focus-visible {
         color: $white;
-        background: rgba($primary, 0.12);
         outline: none;
+
+        .mobile-nav-label::after {
+          width: 100%;
+        }
       }
 
       &.active,
       &[aria-current='page'] {
-        color: $white;
-        background: rgba($primary, 0.16);
+        color: $primary;
+
+        .mobile-nav-label::after {
+          width: 100%;
+          background-color: $primary;
+        }
+      }
+
+      &.active:hover,
+      &[aria-current='page']:hover,
+      &.active:focus-visible,
+      &[aria-current='page']:focus-visible {
+        color: $primary-light;
+
+        .mobile-nav-label::after {
+          background-color: $primary-light;
+        }
       }
     }
 
@@ -346,14 +384,32 @@
       gap: $spacing-sm;
 
       a {
+        display: inline-flex;
+        width: fit-content;
         color: $white;
         text-decoration: none;
+        position: relative;
         transition: color $transition-base;
+
+        &::after {
+          content: '';
+          position: absolute;
+          bottom: -4px;
+          left: 0;
+          width: 0;
+          height: 2px;
+          background-color: $primary-light;
+          transition: width $transition-base, background-color $transition-base;
+        }
 
         &:hover,
         &:focus-visible {
-          color: $primary;
+          color: $white;
           outline: none;
+
+          &::after {
+            width: 100%;
+          }
         }
       }
     }

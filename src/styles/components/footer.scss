@@ -38,8 +38,10 @@
 
         a {
           color: $white;
-          transition: all $transition-base;
+          transition: color $transition-base;
           position: relative;
+          display: inline-flex;
+          width: fit-content;
 
           &::after {
             content: "";
@@ -54,6 +56,15 @@
 
           &:hover {
             color: $white;
+
+            &::after {
+              width: 100%;
+            }
+          }
+
+          &:focus-visible {
+            color: $white;
+            outline: none;
 
             &::after {
               width: 100%;
