@@ -58,10 +58,10 @@
     justify-content: center;
     flex-direction: column;
     gap: 5px;
-    width: 48px;
-    height: 48px;
+    // width: 48px;
+    // height: 48px;
     padding: 0;
-    border: 1px solid rgba($white, 0.2);
+    // border: 1px solid rgba($white, 0.2);
     border-radius: $radius-md;
     background: transparent;
     color: $white;
@@ -219,10 +219,6 @@
 
 @media (max-width: $breakpoint-md) {
   .header {
-    .container {
-      position: relative;
-    }
-
     .header-actions {
       gap: 0;
     }
@@ -242,28 +238,31 @@
     }
 
     .mobile-menu {
-      position: absolute;
-      top: calc(100% + #{$spacing-sm});
-      right: $spacing-md;
-      left: $spacing-md;
+      position: fixed;
+      inset: 0;
       display: flex;
       flex-direction: column;
-      gap: $spacing-xs;
-      padding: $spacing-sm;
-      border: 1px solid rgba($white, 0.08);
-      border-radius: $radius-lg;
+      min-height: 100vh;
+      padding: calc(7.25rem + #{$spacing-md}) $spacing-md $spacing-xl;
       background: rgba($black-light, 0.98);
       box-shadow: $shadow-xl;
       opacity: 0;
       pointer-events: none;
-      transform: translateY(-0.5rem);
+      transform: translateY(-1rem);
       transition: opacity $transition-base, transform $transition-base;
+      overflow-y: auto;
 
       &.is-open {
         opacity: 1;
         pointer-events: auto;
         transform: translateY(0);
       }
+    }
+
+    .mobile-menu-main {
+      display: flex;
+      flex-direction: column;
+      gap: $spacing-xs;
     }
 
     .mobile-nav-link {
@@ -282,14 +281,14 @@
 
       &:hover,
       &:focus-visible {
-        color: $primary;
+        color: $white;
         background: rgba($primary, 0.12);
         outline: none;
       }
 
       &.active,
       &[aria-current='page'] {
-        color: $primary;
+        color: $white;
         background: rgba($primary, 0.16);
       }
     }
@@ -306,6 +305,58 @@
       color: $black;
       font-size: $font-size-sm;
       font-weight: 700;
+    }
+
+    .mobile-menu-footer {
+      margin-top: auto;
+      padding-top: $spacing-xl;
+      display: flex;
+      flex-direction: column;
+      gap: $spacing-lg;
+    }
+
+    .mobile-footer-content {
+      display: grid;
+      gap: $spacing-lg;
+    }
+
+    .mobile-footer-section {
+      h4 {
+        margin-bottom: $spacing-sm;
+        color: $white;
+        font-size: $font-size-lg;
+        font-family: $font-display;
+      }
+
+      p {
+        margin-bottom: $spacing-xs;
+        color: rgba($white, 0.82);
+      }
+    }
+
+    .mobile-footer-links {
+      display: flex;
+      flex-direction: column;
+      gap: $spacing-sm;
+
+      a {
+        color: $white;
+        text-decoration: none;
+        transition: color $transition-base;
+
+        &:hover,
+        &:focus-visible {
+          color: $primary;
+          outline: none;
+        }
+      }
+    }
+
+    .mobile-footer-bottom {
+      padding-top: $spacing-lg;
+      border-top: 1px solid rgba($white, 0.16);
+      color: rgba($white, 0.72);
+      font-size: $font-size-sm;
     }
   }
 }

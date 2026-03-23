@@ -9,10 +9,19 @@ export default function Header() {
   const cartItems = useCartStore((state: any) => state.cart);
   const itemCount = cartItems.reduce((sum: number, item: any) => sum + item.quantity, 0);
   const cartLabel = itemCount > 0 ? `Cart, ${itemCount} item${itemCount === 1 ? '' : 's'}` : 'Cart';
+  const currentYear = new Date().getFullYear();
 
   useEffect(() => {
     setIsMobileMenuOpen(false);
   }, [location.pathname]);
+
+  useEffect(() => {
+    document.body.style.overflow = isMobileMenuOpen ? 'hidden' : '';
+
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isMobileMenuOpen]);
 
   return (
     <header className="header">
@@ -64,13 +73,43 @@ export default function Header() {
           className={`mobile-menu ${isMobileMenuOpen ? 'is-open' : ''}`}
           aria-label="Mobile navigation"
         >
-          <NavLink to="/categories" className="mobile-nav-link">
-            Categories
-          </NavLink>
-          <NavLink to="/cart" className="mobile-nav-link" aria-label={cartLabel}>
-            Cart
-            {itemCount > 0 && <span className="mobile-nav-badge">{itemCount}</span>}
-          </NavLink>
+          <div className="mobile-menu-main">
+            <NavLink to="/categories" className="mobile-nav-link">
+              Categories
+            </NavLink>
+            <NavLink to="/cart" className="mobile-nav-link" aria-label={cartLabel}>
+              Cart
+              {itemCount > 0 && <span className="mobile-nav-badge">{itemCount}</span>}
+            </NavLink>
+          </div>
+
+          <div className="mobile-menu-footer" aria-label="Store information">
+            <div className="mobile-footer-content">
+              <div className="mobile-footer-section">
+                <h4>About</h4>
+                <p>Your favorite online store powered by Platzi Fake Store API.</p>
+              </div>
+
+              <div className="mobile-footer-section">
+                <h4>Quick Links</h4>
+                <div className="mobile-footer-links">
+                  <Link to="/">Home</Link>
+                  <Link to="/categories">Categories</Link>
+                  <Link to="/cart">Cart</Link>
+                </div>
+              </div>
+
+              <div className="mobile-footer-section">
+                <h4>Contact</h4>
+                <p>Email: support@platzistore.com</p>
+                <p>Phone: +1 (555) 123-4567</p>
+              </div>
+            </div>
+
+            <div className="mobile-footer-bottom">
+              <p>&copy; {currentYear} Made by Seri Han. All rights reserved.</p>
+            </div>
+          </div>
         </nav>
       </div>
     </header>
